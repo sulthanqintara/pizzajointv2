@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 // types
 import { BaseType, Pizza } from "../App";
@@ -10,14 +10,26 @@ interface Props {
   pizza: Pizza;
 }
 
+const containerVariants: Variants = {
+  hidden: { x: "100vw", opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { type: "spring", delay: 0.5 } },
+};
+const nextVariants: Variants = {
+  hidden: { x: "-100vw" },
+  visible: {
+    x: 0,
+    transition: { type: "spring", stiffness: 120 },
+  },
+};
+
 const Base: React.FC<Props> = ({ addBase, pizza }) => {
   const bases: BaseType[] = ["Classic", "Thin & Crispy", "Thick Crust"];
   return (
     <motion.div
       className="base container"
-      initial={{ x: "100vw" }}
-      animate={{ x: 0 }}
-      transition={{ type: "spring", delay: 0.5 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
     >
       <h3>Step 1: Choose Your Base</h3>
       <ul>
@@ -37,12 +49,7 @@ const Base: React.FC<Props> = ({ addBase, pizza }) => {
       </ul>
 
       {pizza.base && (
-        <motion.div
-          className="next"
-          initial={{ x: "-100vw" }}
-          animate={{ x: 0 }}
-          transition={{ type: "spring", stiffness: 120 }}
-        >
+        <motion.div className="next" variants={nextVariants}>
           <Link to="/toppings">
             <motion.button
               whileHover={{
