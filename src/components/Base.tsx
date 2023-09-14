@@ -21,6 +21,18 @@ const nextVariants: Variants = {
     transition: { type: "spring", stiffness: 120 },
   },
 };
+const buttonVariants: Variants = {
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,255,255)",
+    transition: {
+      repeatType: "mirror",
+      repeat: Infinity,
+      duration: 0.3,
+    },
+  },
+};
 
 const Base: React.FC<Props> = ({ addBase, pizza }) => {
   const bases: BaseType[] = ["Classic", "Thin & Crispy", "Thick Crust"];
@@ -51,13 +63,7 @@ const Base: React.FC<Props> = ({ addBase, pizza }) => {
       {pizza.base && (
         <motion.div className="next" variants={nextVariants}>
           <Link to="/toppings">
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                textShadow: "0px 0px 8px rgb(255,255,255)",
-                boxShadow: "0px 0px 8px rgb(255,255,255)",
-              }}
-            >
+            <motion.button variants={buttonVariants} whileHover="hover">
               Next
             </motion.button>
           </Link>
