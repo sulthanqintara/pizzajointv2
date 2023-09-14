@@ -18,6 +18,10 @@ const containerVariants: Variants = {
       staggerChildren: 0.4,
     },
   },
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeInOut" },
+  },
 };
 const childVariants: Variants = {
   hidden: { opacity: 0 },
@@ -30,6 +34,7 @@ const Order: React.FC<Props> = ({ pizza }) => {
       initial="hidden"
       animate="visible"
       className="container order"
+      exit="exit"
     >
       <h2>Thank you for your order :)</h2>
       <motion.p variants={childVariants}>You ordered a {pizza.base} pizza with:</motion.p>
